@@ -309,40 +309,36 @@
     transition: none;
   }
 
-  // [tablet landscape +]: Tree-like table of contents
-  @include break-from-device(tablet landscape) {
+  // Table of contents
+  &--secondary {
+    margin-block: px2rem(2px);
 
-    // Table of contents
-    &--secondary {
-      margin-block: px2rem(2px);
+    // Adjust spacing
+    .md-nav {
+      margin-top: px2rem(4px);
 
-      // Adjust spacing
-      .md-nav {
-        margin-top: px2rem(4px);
+      // Navigation title
+      &__title {
+        position: sticky;
+        top: 0;
+        // Hack: because of the hack that we need to make .md-ellipsis work in
+        // Safari, we need to set `z-index` here as - see https://bit.ly/3s5M2jm
+        z-index: 1;
+        display: flex;
+        padding: px2rem(7px) px2rem(12px);
+        margin-inline: px2rem(4px);
+        font-weight: 700;
+        background: var(--md-default-bg-color);
 
-        // Navigation title
-        &__title {
-          position: sticky;
-          top: 0;
-          // Hack: because of the hack that we need to make .md-ellipsis work in
-          // Safari, we need to set `z-index` here as - see https://bit.ly/3s5M2jm
-          z-index: 1;
-          display: flex;
-          padding: px2rem(7px) px2rem(12px);
-          margin-inline: px2rem(4px);
-          font-weight: 700;
-          background: var(--md-default-bg-color);
-
-          // Hide navigation icon
-          .md-nav__icon {
-            display: none;
-          }
+        // Hide navigation icon
+        .md-nav__icon {
+          display: none;
         }
+      }
 
-        // Navigation link
-        &__link {
-          padding: px2rem(4px) px2rem(12px);
-        }
+      // Navigation link
+      &__link {
+        padding: px2rem(4px) px2rem(12px);
       }
     }
   }
@@ -388,6 +384,47 @@
   // Repository information container
   &__source {
     display: none;
+  }
+
+  // Modifier for when table of contents is rendered in primary navigation
+  &--integrated > .md-nav__list > .md-nav__item--active {
+
+    // Show integrated table of contents
+    .md-nav--secondary {
+      display: block;
+      margin-inline-start: px2rem(22px);
+      margin-block: 0.5em;
+      visibility: visible;
+      border-inline-start: px2rem(1px) solid var(--md-default-fg-color--lightest);
+      opacity: 1;
+
+      // Navigation link
+      .md-nav__link {
+        background: transparent;
+
+        // Active link in table of contents
+        &--active {
+          font-weight: 500;
+        }
+
+        // Navigation link on focus/hover
+        &:is(:focus, :hover) {
+          color: var(--md-accent-fg-color);
+        }
+      }
+
+      // Navigation list
+      > .md-nav__list {
+        padding-bottom: 0;
+        margin-left: 0;
+        overflow: visible;
+      }
+
+      // Hide table of contents title
+      > .md-nav__title {
+        display: none;
+      }
+    }
   }
 
   // [screen +]: Tree-like navigation
@@ -497,29 +534,5 @@
         opacity: 1;
       }
     }
-
-    // // Modifier for when table of contents is rendered in primary navigation
-    // &--integrated > .md-nav__list > .md-nav__item--active {
-
-    //   // Show integrated table of contents
-    //   .md-nav--secondary {
-    //     display: block;
-    //     margin-bottom: 1.25em;
-    //     visibility: visible;
-    //     // border-inline-start: px2rem(1px) solid var(--md-primary-fg-color);
-    //     opacity: 1;
-
-    //     // Navigation list
-    //     > .md-nav__list {
-    //       padding-bottom: 0;
-    //       overflow: visible;
-    //     }
-
-    //     // Hide table of contents title
-    //     > .md-nav__title {
-    //       display: none;
-    //     }
-    //   }
-    // }
   }
 }
