@@ -124,7 +124,6 @@ export function mountSearchHighlight(
 export function setupSearchHighlighter(
   config: SearchConfig
 ): (query: string) => (value: string) => string {
-  console.log("Setting up search highlighter", config)
   // Hack: temporarily remove pure lookaheads and lookbehinds
   const regex = config.separator.split("|").map(term => {
     const temp = term.replace(/(\(\?[!=<][^)]+\))/g, "")
