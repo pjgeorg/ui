@@ -35,8 +35,11 @@ import {
   switchMap
 } from "rxjs"
 
+// @ts-ignore
+import { isSearchHidden } from "~/components/search/client"
+
 import { getActiveElement } from "../element"
-import { getToggle } from "../toggle"
+
 
 /* ----------------------------------------------------------------------------
  * Types
@@ -125,7 +128,7 @@ export function watchKeyboard(): Observable<Keyboard> {
   const keyboard$ = fromEvent<KeyboardEvent>(window, "keydown")
     .pipe(
       map(ev => ({
-        mode: getToggle("search") ? "search" : "global",
+        mode: !isSearchHidden() ? "search" : "global",
         type: ev.key,
         meta: ev.ctrlKey || ev.metaKey,
         claim() {
