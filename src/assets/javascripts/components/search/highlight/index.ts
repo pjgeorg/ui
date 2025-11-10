@@ -147,7 +147,9 @@ export function setupSearchHighlighter(
     const match = new RegExp(`(^|${config.separator}|)(${
       query
         .replace(/[|\\{}()[\]^$+*?.-]/g, "\\$&")
-        .replace(separator, "|")
+        .split(separator)
+        .filter(term => term.length > 0)
+        .join("|")
     })`, "img")
 
     /* Highlight string value */
