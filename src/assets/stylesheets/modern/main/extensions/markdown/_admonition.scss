@@ -116,11 +116,6 @@ $admonitions: (
     margin-block: px2rem(12px) 1em;
     font-weight: 700;
 
-    // Adjust spacing for title-only admonitions
-    html &:last-child {
-      margin-bottom: 0;
-    }
-
     // Admonition icon
     &::before {
       position: absolute;
